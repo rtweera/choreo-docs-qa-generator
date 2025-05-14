@@ -5,10 +5,10 @@ from .llm import summarize_by_llm
 
 def sum(docs_dir: str) -> None:
     """
-    Generates summary Markdown files for each subdirectory in the given directory.
+    Generates sum Markdown files for each subdirectory in the given directory.
     This function iterates through all subdirectories in the specified directory,
     reads the content of all Markdown (.md) files within each subdirectory, and
-    concatenates their content into a single summary file. The summary file is
+    concatenates their content into a single sum file. The sum file is
     saved in the respective subdirectory with the name `<subdirectory_name>_sum.md`.
     Args:
         docs_dir (str): The path to the directory containing subdirectories with Markdown files.
@@ -59,3 +59,34 @@ def summarize(docs_dir: str) -> None:
             with open(out_path, 'w', encoding='utf-8') as o:
                 o.write(summary)
 
+
+def concat_summaries(docs_dir: str) -> None:
+    """
+    Concatenates summary files from subdirectories within the specified directory 
+    and writes the combined content into a single file named 'final_summary.md'.
+
+    Args:
+        docs_dir (str): The path to the directory containing subdirectories with summary files.
+
+    Returns:
+        None
+
+    Notes:
+        - Each subdirectory within `docs_dir` is expected to contain a summary file named 
+          '<subdirectory_name>_summary.md'.
+        - The concatenated content is written to 'final_summary.md' in the `docs_dir` directory.
+        - If a subdirectory does not contain the expected summary file, it will be skipped.
+    """
+    concat_content = """"""
+    for item in tqdm(os.listdir(docs_dir), desc='Concatenate summaries'):
+        item_path = os.path.join(docs_dir, item)
+        if os.path.isdir(item_path):
+            file_path = os.path.join(item_path, f'{item}_summary.md')
+            with open(file_path, 'r', encoding='utf-8') as f:
+                concat_content += f.read() + '\n\n'
+    print('Writing to file')
+    final_summary_filename = 'final_summary.md'
+    final_summary_path = os.path.join(docs_dir, final_summary_filename)
+    with open(final_summary_path, 'w', encoding='utf-8') as f:
+        f.write(concat_content)
+    print('Done writing to file')
