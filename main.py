@@ -4,7 +4,8 @@ from app import directory_sum, llm
 from config import config
 from app.logger import Logger
 
-logger = Logger(__name__, "main_runs.log")
+health_logger = Logger(__name__, "main_runs.log")
+llm_logger = Logger(__name__, 'llm_runs.log')
 
 
 def full_flow():
@@ -25,11 +26,12 @@ def main():
     args = parser.parse_args()
 
     if args.health:
-        logger.info(llm.model_health_check())
+        health_logger.info(llm.model_health_check())
     if args.concat:
         directory_sum.concat_summaries(config.DOCS_DIR)
     if args.question:
-        print(llm.generate_questions())
+        health_logger.info('LLM run: Question generation')
+        llm_logger.info(llm.generate_questions())
     if args.all:
         full_flow()
 
