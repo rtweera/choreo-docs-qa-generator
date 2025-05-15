@@ -1,0 +1,441 @@
+question,answer
+How can I configure mutual TLS between components in Choreo?,"To configure mutual TLS (mTLS) between components in Choreo, follow these steps:
+
+### 1. Generate Certificates
+You need to generate three types of certificates:
+- **Root Certificate:** This is a trusted certificate used to verify the authenticity of the client and server certificates.
+- **Client Certificate:** This represents the identity of the client and must be signed by the root certificate.
+- **Server Certificate:** This is used by clients to verify the server's identity, and it must also be signed by the root certificate. Ensure to specify the server's hostname in the subject alternative name (SAN) when generating the server certificate.
+
+You can generate these certificates using a tool like OpenSSL.
+
+### 2. Read Certificates in Your Component
+Your component needs to read the mutual TLS certificates, which can typically be done from the file system or via environment variables. Ensure that the private key is saved as a secret.
+
+### 3. Configure Mutual TLS in Choreo Console
+To establish secure communication:
+1. **Sign in to the Choreo Console**.
+2. In the **Component Listing** pane, select the component (like an API proxy) for which you want to configure mutual TLS.
+3. Navigate to **Develop** > **Endpoints**.
+4. Click **Configure** corresponding to the endpoint.
+5. Turn on the **Mutual SSL** toggle.
+6. **Add Client Certificate**:
+   - You can either generate a new key pair or use your own certificate pair.
+   - If generating a new pair, specify a common name for the certificate.
+   - If using your own, upload the private key and public certificate in PEM format.
+7. Click **Save** to associate the certificate with the API.
+
+### 4. Deploy the API
+After configuring mutual TLS, you can deploy the API:
+1. In the left navigation menu, click **Deploy**.
+2. Click **Configure & Deploy** in the **Build Area** card.
+3. Once the deployment is complete, verify the endpoint URL and click **Save & Deploy**.
+
+### Example and Further Reference
+For a practical example of mutual TLS communication, refer to the [service-to-service-mtls](https://github.com/wso2/choreo-samples/tree/main/docker-service-to-service-mtls) sample.
+
+For more detailed instructions, you can refer to the documentation on [Configuring Mutual TLS Between Components](https://wso2.com/choreo/docs/authentication-and-authorization/configure-mutual-tls-between-components/)."
+How can I pass end-user attributes to my backend services?,"In Choreo, end-user attributes can be passed to backend services through the use of a JSON Web Token (JWT) included in the HTTP headers of an API request. This functionality is particularly useful when the backend service needs to make decisions based on the user consuming an API.
+
+### How It Works
+When an API request is made through Choreo, a digitally signed JWT is generated and sent to the backend service. The JWT is structured in the following format:
+```
+{token header}.{claims list}.{signature}
+```
+The JWT contains claims, which can include metadata about the request or data regarding the user. The backend service can retrieve the JWT from the `X-JWT-Assertion` header in the outgoing message to access the necessary user information, application details, or token specifics.
+
+### Steps to Enable Passing of End-User Attributes
+To enable the passing of end-user attributes to the backend, you need to configure your component in the Choreo Console. Here’s how to do it:
+
+1. In the **Components Listing** pane, click on the component for which you want to enable passing end-user attributes.
+2. In the left navigation menu, click **Deploy**.
+3. Go to the **Set Up** card and click **Endpoint Configurations**.
+4. If your component is an API Proxy, navigate to the **Build Area** card and click **Security Settings** instead.
+5. Select the **Pass Security Context To Backend** checkbox.
+6. (Optional) Specify audience values in the **End User Token Audiences** field to restrict the JWT to specific audiences, helping the backend service validate the intended recipients.
+7. Click **Apply**.
+8. To apply the changes, redeploy the component by clicking on the **Deploy** button.
+
+### Claims in the JWT
+Claims are fragments of information included in the JWT, and they can provide key details about the user or the request. Here’s a sample claim set that might be included in the JWT:
+```json
+{
+  ""sub"": ""11f53c32-f8ac-4810-bb79-615b2184baf5"",
+  ""email"": ""testmail@gmail.com"",
+  ""iat"": 1690533762,
+  ""exp"": 1690537362,
+  ""iss"": ""wso2.org/products/am"",
+  ...
+}
+```
+Claims can vary based on the grant type used when generating the access token. The backend service can use these claims to make informed decisions about the API request.
+
+### Validating the JWT
+To validate the JWT, Choreo provides a JSON Web Key Set (JWKS) endpoint. The public keys in the JWKS can be used by the backend service to verify the authenticity of the JWT claims. Here are the endpoints for the US East and EU regions:
+- [US East JWKS Endpoint](https://gateway.e1-us-east-azure.choreoapis.dev/.wellknown/jwks)
+- [EU JWKS Endpoint](https://gateway.e1-eu-north-azure.choreoapis.dev/.wellknown/jwks)
+
+For more detailed information on passing end-user attributes to backend services, you can refer to the [Choreo documentation](https://wso2.com/choreo/docs/authentication-and-authorization/pass-end-user-attributes-to-upstream-services/)."
+How can I secure my API access with Asgardeo?,"To integrate Asgardeo for securing API access in Choreo, follow these comprehensive steps:
+
+### Prerequisites
+Before you start, ensure you have:
+- Configured Asgardeo as an external Identity Provider (IdP). You can follow the guide [here](https://wso2.com/choreo/docs/administer/configure-an-external-idp/configure-asgardeo-as-an-external-idp).
+- Developed a service or an API Proxy in Choreo if you don't already have one. Refer to [develop a service](https://wso2.com/choreo/docs/develop-components/develop-services/develop-a-service) or [develop an API Proxy](https://wso2.com/choreo/docs/develop-components/develop-an-api-proxy).
+- Deployed and published your API.
+
+### Step 1: Assign Scopes to an API in Choreo
+1. In the **Component Listing** pane, select the component (API) you want to assign scopes to.
+2. Navigate to **Manage** and then **Permissions**.
+3. Click **+ Add Permission (Scope)**.
+4. Enter the permission value and click **+ Add New**.
+5. Copy the fully qualified name of the scope for future reference by clicking the copy icon next to it.
+6. To attach a scope to a resource, select the respective resource and choose the scopes you wish to attach.
+7. Click **Save and Deploy**.
+8. Finally, navigate to **Manage** and then **Lifecycle**, and click **Publish** to publish your API to the Choreo Developer Portal.
+
+For detailed instructions, refer to [Step 1 of the integration guide](https://wso2.com/choreo/docs/authentication-and-authorization/secure-api-access-with-asgardeo/#step-1-assign-scopes-to-an-api-in-choreo).
+
+### Step 2: Create an API and an Application in Asgardeo
+Follow the [Asgardeo API Authorization guide](https://wso2.com/asgardeo/docs/guides/api-authorization/) to create an application and an API in Asgardeo, and to enable API authorization. 
+
+- Ensure you select `JWT` as the **Access Token** and choose the appropriate grant types. 
+- Copy the client ID and client secret of the application for future reference.
+
+For specific steps, see [Step 2 of the integration guide](https://wso2.com/choreo/docs/authentication-and-authorization/secure-api-access-with-asgardeo/#step-2-create-an-api-and-an-application-in-asgardeo).
+
+### Step 3: Create an Application in Choreo and Enable External IdP Authentication
+1. In the Choreo Developer Portal, click on **Applications** and then click **+Create**.
+2. Enter a name and description for your application and click **Create**.
+3. Under **Credentials**, click on **Production**.
+4. Select **Identity Provider** as Asgardeo.
+5. Enter the **Client ID** you copied from the previous step and click **+Add**.
+   - Note: You can only use the Client ID in one application.
+6. Click on **Subscriptions** in the left navigation menu.
+7. In the **Subscription Management** pane, click **+ Add APIs**.
+8. Select the API you assigned scopes to previously and click **Add**.
+
+For more details, refer to [Step 3 of the integration guide](https://wso2.com/choreo/docs/authentication-and-authorization/secure-api-access-with-asgardeo/#step-3-create-an-application-in-choreo-and-enable-external-idp-authentication).
+
+### Invoking the API
+After setting up the integration, you can invoke the API with the specified scopes. This ensures that only authorized users can access your API based on the defined permissions.
+
+For complete guidance, please visit the full documentation on [Secure API Access with Asgardeo](https://wso2.com/choreo/docs/authentication-and-authorization/secure-api-access-with-asgardeo/)."
+How can I configure mutual TLS between the Choreo Gateway and my backend?,"To configure mutual TLS (mTLS) between the Choreo Gateway and your backend service, follow the steps outlined below. This ensures secure communication by validating both the client and server certificates before establishing a connection.
+
+### Step 1: Configure the Backend Certificate
+1. Ensure that your backend service is protected with TLS.
+2. Extract the public certificate of your backend server in PEM format and save it with a `.pem` extension.
+3. In the Choreo Console:
+   - Go to the **Component Listing** pane and select the API proxy for which you want to configure TLS.
+   - Navigate to **Develop** > **Endpoints**.
+   - Click **Configure** next to the endpoint.
+   - Click **Upload Endpoint Certificate** and select the backend certificate file to add it.
+
+### Step 2: Configure Mutual TLS
+You can configure mutual TLS in two ways:
+
+#### Option A: Generate a Key Pair through Choreo
+1. In the **Endpoints** page, after ensuring the backend certificate is uploaded, enable the **Mutual SSL** toggle.
+2. Click **Add Client Certificate** and select **Generate new key pair**.
+3. Specify a common name for the certificate pair used for identification.
+4. Optionally, configure advanced options.
+5. Click **Generate** to create the certificate.
+6. View and download the generated certificate in PEM format to add it to your backend as a trusted certificate.
+
+#### Option B: Use Your Own Certificate Pair
+1. On the **Endpoints** page, enable the **Mutual SSL** toggle.
+2. Click **Add Client Certificate** and select **Use my own key pair**.
+3. Upload your private key and public certificate in PEM format or paste their contents.
+4. Click **Add** to complete the addition of your custom certificate.
+
+### Step 3: Associate the Certificate with the API
+1. On the **Endpoints** page, navigate to the **Existing Certificates** section.
+2. Select the certificate you want to associate with the API and click **Save**.
+
+### Step 4: Deploy the API
+1. In the left navigation menu, click **Deploy**.
+2. Click **Configure & Deploy** in the **Build Area** card.
+3. After the mediation application generation phase, verify the endpoint URL and click **Save & Deploy**.
+
+This configuration will enable mutual TLS, ensuring secure communication between the Choreo Gateway and your backend service.
+
+For more detailed instructions, you can refer to the following documentation: [Secure Communication Between the Choreo Gateway and Your Backend with Mutual TLS](https://wso2.com/choreo/docs/authentication-and-authorization/secure-communication-between-the-choreo-gateway-and-your-backend-with-mutual-tls/#configure-mutual-tls-to-establish-secure-connectivity)."
+How can I secure my web applications with managed authentication?,"To secure web applications with managed authentication in Choreo, you can follow these steps:
+
+### 1. Set Up Managed Authentication for Your Web Application
+Before integrating managed authentication, ensure your web application is built using compatible frameworks such as React, Angular, or Vue.js. Managed authentication is typically enabled by default for these buildpacks.
+
+#### Implement Sign-In Functionality
+You need to implement a sign-in button that redirects users to the `/auth/login` path. Here's an example code snippet:
+
+```javascript
+<button onClick={() => {window.location.href=""/auth/login""}}>Login</button>
+```
+
+This button will redirect users to the configured identity provider for authentication. On successful sign-in, Choreo will manage the session cookies.
+
+#### Obtain User Information Claims
+Post sign-in, Choreo provides a `userinfo` cookie containing user information claims. You can access this cookie using a library like `js-cookie`. Here’s a sample code snippet to retrieve and clear the user information:
+
+```javascript
+import Cookies from 'js-cookie';
+
+const encodedUserInfo = Cookies.get('userinfo');
+const userInfo = JSON.parse(atob(encodedUserInfo));
+Cookies.remove('userinfo', { path: <post-login-path> });
+```
+
+#### Implement Sign-Out Functionality
+To allow users to sign out, implement a button that redirects them to the `/auth/logout` path:
+
+```javascript
+<button onClick={() => {window.location.href = `/auth/logout?session_hint=${Cookies.get('session_hint')}`;}}>Logout</button>
+```
+
+### 2. Enable Managed Authentication and Configure Paths
+You need to enable managed authentication for your web application component within Choreo:
+
+1. Go to the component you want to secure in the Choreo Console.
+2. Click on **Deploy**.
+3. In the **Set Up** card, click **Configure & Deploy**.
+4. Ensure the **Managed Authentication with Choreo** toggle is enabled.
+5. Set up paths for post-login, post-logout, and error handling according to your needs.
+
+| Field            | Description      | Default Value      |
+|------------------|------------------|-------------------|
+| Post Login Path  | Redirect path after sign-in | `/` |
+| Post Logout Path | Redirect path after sign-out | `/` |
+| Error Path       | Redirect path for errors | Built-in error page |
+| Session Expiry Time | Session expiration time in minutes | 10080 (7 Days) |
+| Additional Scopes | Additional required scopes | none |
+
+### 3. Configure the Identity Provider
+You can configure your web application to work with Choreo's built-in identity provider or an external identity provider that supports OIDC/OAuth2.0.
+
+- **Choreo Built-In Identity Provider**: 
+  - Go to the component settings in the Choreo Console.
+  - Click on **Authentication Keys** and select the environment.
+  - Choose **Choreo Built-In Identity Provider** and click **Generate Secret** (if not already generated).
+
+- **Asgardeo or External Identity Provider**:
+  - Create and configure an OIDC/OAuth2.0 application in your identity provider.
+  - Obtain the **Client ID** and **Client Secret**.
+  - In the Choreo Console, link the OIDC/OAuth2.0 application to your component.
+
+### 4. Handle Session Expiry
+Implement logic to handle session expiry by checking for a `401 Unauthorized` response and redirecting users to the login page if needed.
+
+### Additional Resources
+- For more details on configuring the identity provider, see [Configure the Identity Provider for Your Web Application](https://wso2.com/choreo/docs/authentication-and-authorization/secure-web-applications-with-managed-authentication/#step-3-configure-the-identity-provider-for-the-web-application).
+- To learn more about managed authentication and its capabilities, refer to the main document: [Secure Web Applications with Managed Authentication](https://wso2.com/choreo/docs/authentication-and-authorization/secure-web-applications-with-managed-authentication/).
+
+By following these steps, you can effectively secure your web applications using Choreo's managed authentication."
+How do I test secure API access with Choreo's built-in security token service?,"To test secure API access using Choreo's built-in security token service, you need to follow a structured approach that involves configuring permissions, roles, and user groups. Here’s a comprehensive guide on how to do this:
+
+### Prerequisites
+Before you start testing, ensure that you have the following set up:
+- **Configured the Choreo built-in identity provider (IdP)** with users. You can refer to the documentation on [Configuring a User Store with the Built-In Identity Provider](https://wso2.com/choreo/docs/administer/configure-a-user-store-with-built-in-idp).
+- **Deployed and published an API** via Choreo. If you don't have an existing service, you can either [develop a service](https://wso2.com/choreo/docs/develop-components/develop-services/develop-a-service) or create an [API Proxy](https://wso2.com/choreo/docs/develop-components/develop-an-api-proxy).
+- **A web application for API subscription**. If you don't have an application in Choreo, you can [create a web application](https://wso2.com/choreo/docs/develop-components/develop-web-applications/build-and-deploy-a-single-page-web-application).
+- **Administrator rights** in your Choreo organization to configure role-group and role-permission mappings.
+
+### Steps to Test Secure API Access
+
+1. **Assign Permissions to an API**
+   - In the Choreo Console, go to the top navigation menu and select your project.
+   - Click on the component for which you want to attach permissions.
+   - In the left navigation menu, click **Deploy**.
+   - In the **Endpoint Configurations** pane, go to the **Permissions List** section and click **+ Add Permission(Scope)**.
+   - Enter a permission value and click **+ Add New**. Copy the fully qualified name of the added permission for future reference.
+   - Attach permissions to the appropriate resources and click **Apply**.
+   - Redeploy the component to apply the latest permissions.
+
+   For detailed steps, refer to [Assign Permissions to an API](https://wso2.com/choreo/docs/authentication-and-authorization/test-secure-api-access-with-choreo-built-in-security-token-service/#step-1-assign-permissions-to-an-api-in-choreo).
+
+2. **Create Roles and Assign Permissions**
+   - In the Choreo Console, navigate to the **Settings** under your project.
+   - Click the **Application Security** tab and select **+ Role**.
+   - Specify a role name and description, select permissions to assign to this role, and click **Create**.
+
+   For further details, check [Create Roles and Assign Permissions](https://wso2.com/choreo/docs/authentication-and-authorization/test-secure-api-access-with-choreo-built-in-security-token-service/#step-2-create-roles-and-assign-permissions).
+
+3. **Assign Roles to User Groups**
+   - Go to the **Application Security** tab and click on **Role Management**.
+   - Click **Map Groups** next to the role you wish to assign to a group.
+   - Specify group names as needed and click **Save**.
+
+   More information can be found here: [Assign Roles to User Groups](https://wso2.com/choreo/docs/authentication-and-authorization/test-secure-api-access-with-choreo-built-in-security-token-service/#step-3-assign-roles-to-user-groups).
+
+4. **Test API Invocation**
+   - Once all configurations are set, you can proceed to test the API invocation by using the Choreo built-in security token service.
+   - The testing can be done with managed authentication enabled or disabled based on your application's requirements.
+
+For complete guidance, you can refer to the main document on [Testing Secure API Access with Choreo Built-In Security Token Service](https://wso2.com/choreo/docs/authentication-and-authorization/test-secure-api-access-with-choreo-built-in-security-token-service/). 
+
+This structured approach will help you effectively test the secure API access using Choreo's built-in security token service."
+What is the Choreo CLI and how do I use it?,"Choreo CLI (Command Line Interface) is a powerful tool that enables developers to create, deploy, and manage various components within the Choreo platform directly from the command line. It simplifies the development process by allowing users to perform actions that would typically require navigating through a graphical user interface (GUI). 
+
+### Key Features of Choreo CLI:
+- **Supported Component Types**: The CLI currently supports the following component types:
+  - Service
+  - Web Application
+  - Webhook
+  - Scheduled Task
+  - Manual Task
+
+### How to Use Choreo CLI:
+Here are detailed instructions on how to utilize the Choreo CLI effectively:
+
+1. **Install Choreo CLI**:
+   If you haven't installed the CLI yet, you can do so by running the following command:
+   ```sh
+   curl -o- https://cli.choreo.dev/install.sh | bash
+   ```
+
+2. **Check Help for Commands**:
+   To get help with a specific command, use the following syntax:
+   ```sh
+   choreo <command> --help
+   ```
+
+3. **Creating Components**:
+   You can create a component using the following command structure:
+   ```sh
+   choreo create component <name> --project <name> --build-configs='key1=value1,key2=value2'
+   ```
+   If you need to specify multiple build configurations, you can do so like this:
+   ```sh
+   choreo create component <name> --project <name> --build-configs='key1=value1' --build-configs='key2=value2'
+   ```
+
+4. **Build Configurations**:
+   Depending on the component type, you may need to provide specific build configurations. For example:
+   - **For Services**:
+     - Python/Node.js/Java/Go/PHP/Ruby/.Net: `buildPackLangVersion: Language Version`
+     - Docker: `dockerFilePath: Path to the docker file`
+   - **For Web Applications**:
+     - Build configurations include `buildPackLangVersion: Language Version` and `port: Port` among others.
+
+   A detailed table of required configurations for each component type is available in the documentation.
+
+5. **Uninstalling Choreo CLI**:
+   If you need to uninstall the CLI, you can do so by deleting the `.choreo` directory located in your home directory.
+
+6. **Updating Choreo CLI**:
+   To update the CLI to the latest version, run:
+   ```sh
+   curl -o- https://cli.choreo.dev/install.sh | bash
+   ```
+
+For more detailed information and specific use cases, you can refer to the official documentation [here](https://wso2.com/choreo/docs/references/faq/#choreo-cli)."
+How can I manage authentication with Personal Access Tokens in Choreo?,"To manage authentication using Personal Access Tokens in Choreo, you can follow these steps:
+
+1. **Generate Access Token**:
+   - When you register an application in the Developer Portal, you will receive a consumer key and consumer secret. These credentials uniquely identify your application and are crucial for authentication.
+   - The consumer key acts like a username and is essential for making API requests. Choreo issues an access token based on this consumer key, which you include as a string value in the HTTP header of your requests.
+
+   For more detailed instructions on generating an access token, refer to the official documentation: [Generate an Access Token](https://wso2.com/choreo/docs/consuming-services/generate-an-access-token/).
+
+2. **Manage Access Tokens**:
+   - Access tokens should have a limited lifespan to enhance security. By default, the lifespan is set to 15 minutes (900 seconds). It is recommended to keep token lifespans short to minimize risks if a token is compromised.
+   - If needed, you can revoke access tokens, but keep in mind that JWT tokens are self-validating and do not rely on a central authority, making revocation more complex.
+
+   For further information on managing applications and access tokens, you can check: [Manage Applications](https://wso2.com/choreo/docs/consuming-services/manage-application/#revoke-access-tokens).
+
+3. **Grant Types**:
+   - Choreo supports multiple OAuth 2.0 grant types, such as Authorization Code Grant, Refresh Token Grant, and Client Credentials Grant, among others. The choice of grant type affects how your application obtains access tokens.
+
+   More details on the available grant types can be found here: [Grant Types](https://wso2.com/choreo/docs/consuming-services/manage-application/#grant-types).
+
+4. **Testing API Invocation**:
+   - If you have a web application, you can test the API invocation by creating a connection to your API. When deploying, you have the option to allow Choreo to manage authentication on behalf of your application, simplifying the integration process.
+
+   For steps on testing secure API access and invoking APIs, refer to this guide: [Test Secure API Access with Choreo Built-In Security Token Service](https://wso2.com/choreo/docs/authentication-and-authorization/test-secure-api-access-with-choreo-built-in-security-token-service/#step-4-test-the-api-invocation).
+
+By following these steps, you can effectively manage authentication using Personal Access Tokens in Choreo."
+How does the Choreo Marketplace work and how can I leverage it?,"
+The Choreo Marketplace is a platform where users can discover, explore, and access a variety of APIs to integrate into their applications. Users can leverage the Choreo Marketplace for managing and utilizing APIs by browsing through the available APIs, accessing detailed documentation, testing APIs, and integrating them into their projects seamlessly. Additionally, users can also manage their API subscriptions, monitor API usage, and track performance metrics through the Choreo Marketplace dashboard. By utilizing the Choreo Marketplace, users can streamline the process of finding, integrating, and managing APIs for their projects efficiently."
+How can I use connections to integrate services within Choreo?,"In Choreo, connections are used to integrate services seamlessly, enabling you to connect your services with other Choreo services or external resources. Below are the detailed steps and guidelines on how to utilize connections to integrate services within Choreo:
+
+### Step 1: Create a Connection
+Before you can use a connection, you need to create one. For detailed instructions on creating a connection, refer to the [Create a Connection documentation](https://wso2.com/choreo/docs/develop-components/sharing-and-reusing/create-a-connection).
+
+### Step 2: Add Connection Configurations
+Once you have your connection set up, you can add the connection configuration to your service:
+
+1. **Update `component.yaml` file**:
+   - Copy the following snippet into your `component.yaml` file:
+   ```yaml
+   dependencies:
+     connectionReferences:
+       - name: <CONNECTION_NAME>
+         resourceRef: <RESOURCE_IDENTIFIER>
+   ```
+   - Replace `<CONNECTION_NAME>` with the name of your connection and `<RESOURCE_IDENTIFIER>` with the unique identifier of the service you are connecting to.
+
+2. **Environment Variables**:
+   - Upon deploying the component, Choreo injects values into predefined environment variables based on the connection configuration. These include:
+     - `CHOREO_<CONNECTION_NAME>_SERVICEURL`
+     - `CHOREO_<CONNECTION_NAME>_CONSUMERKEY`
+     - `CHOREO_<CONNECTION_NAME>_CONSUMERSECRET`
+     - `CHOREO_<CONNECTION_NAME>_TOKENURL`
+     - `CHOREO_<CONNECTION_NAME>_CHOREOAPIKEY`
+
+3. If you prefer using custom environment variable names, you can define them in the `configuration` section:
+   ```yaml
+   configuration:
+     env:
+       - name: HR_SERVICE_URL
+         valueFrom:
+           connectionRef:
+             name: hr-connection
+             key: ServiceURL
+   ```
+
+### Step 3: Read Configurations in Your Application
+After adding the connection configurations, you can read these configurations in your application code:
+- For example, in NodeJS, you can access the service URL as follows:
+   ```javascript
+   const serviceURL = process.env.CHOREO_<CONNECTION_NAME>_SERVICEURL;
+   ```
+
+### Step 4: Acquire OAuth 2.0 Access Token (if necessary)
+If your service uses OAuth 2.0 for authentication, you need to obtain an access token:
+- Use the following sample cURL command to acquire a token:
+   ```bash
+   CONSUMER_KEY=""your_consumer_key""
+   CONSUMER_SECRET=""your_consumer_secret""
+   TOKEN_URL=""your_token_url""
+
+   CLIENT_CREDENTIALS=$(echo -n ""$CONSUMER_KEY:$CONSUMER_SECRET"" | base64)
+
+   curl -X POST $TOKEN_URL \
+   -H ""Content-Type: application/x-www-form-urlencoded"" \
+   -H ""Authorization: Basic $CLIENT_CREDENTIALS"" \
+   --data-urlencode ""grant_type=client_credentials""
+   ```
+
+### Step 5: Invoke the Service
+Finally, invoke the connected service using the appropriate method based on the authentication scheme:
+- For API key security:
+   ```javascript
+   const response = await axios.get(`${serviceURL}/{RESOURCE_PATH}`, {
+     headers: {
+       'Choreo-API-Key': `${choreoApiKey}`
+     }
+   });
+   ```
+
+- For OAuth 2.0:
+   ```javascript
+   const response = await axios.get(`${serviceURL}/{RESOURCE_PATH}`, {
+     headers: {
+       'Authorization': `Bearer ${accessToken}`
+     }
+   });
+   ```
+
+These steps outline how to integrate services using connections within Choreo. For more detailed guidelines, refer to the following documentation:
+- [Use a Connection in Your Service](https://wso2.com/choreo/docs/develop-components/sharing-and-reusing/use-a-connection-in-your-service/)
+- [Connections Overview](https://wso2.com/choreo/docs/choreo-concepts/connections/)"
