@@ -4,35 +4,9 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 import os
 
-from .context_format import format_qa, load_summary
+from .context_load import load_qa, load_summary
+from .prompts import question_prompt, map_prompt
 
-map_prompt = PromptTemplate.from_template(
-    "Generate a summary from the given following content. Keep the headings as it is because they help with the organization of the document. You can summarize the other things but keep the data loss to a minimum. \n\n<context>\n{context}\n</context>"
-)
-
-reduce_prompt = PromptTemplate.from_template(
-    "Combine the following summaries into a concise overall summary, focusing on key themes and insights:\n\n{context}"
-)
-
-question_prompt = PromptTemplate.from_template(
-"""
-Based on the following documentation about Choreo and the examples of existing questions and answers, generate 5 new questions that are relevant, informative, and follow the same style.
-
---- Context ---
-{context}
-
---- Examples ---
-{examples}
-
---- Task ---
-Now generate 5 new relevant questions (no answers needed):
-1.
-2.
-3.
-4.
-5.
-"""
-)
 
 def model_health_check(prompt="Hello world"):
     model = load_model()
@@ -69,7 +43,7 @@ def summarize_by_llm(
     except Exception as e:
         return f"Error summarising content: {str(e)}"
 
-def generate_questions(summary: str = load_summary(), examples: str = format_qa(), prompt: PromptTemplate = question_prompt, llm = load_model()) -> str:
+def generate_questions(summary: str = load_summary(), examples: str = load_qa(n=100), prompt: PromptTemplate = question_prompt, llm = load_model()) -> str:
     if not summary.strip():
         return "No summary presented"
     if not examples.strip():
@@ -78,7 +52,7 @@ def generate_questions(summary: str = load_summary(), examples: str = format_qa(
     chain = prompt | llm | StrOutputParser();
 
     try:
-        response_with_questions = chain.invoke({"context": summary, "examples": examples})
+        response_with_questions = chain.invoke({"context": summary, "examples": examples, "n": 10})
         return response_with_questions.strip()
     except Exception as e:
         return f"Error getting response: {str(e)}"
