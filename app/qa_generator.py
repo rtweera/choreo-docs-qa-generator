@@ -14,7 +14,7 @@ def run_generate_questions(n: int=1, docs_dir: str='qa', file_name: str='questio
         writer = csv.writer(f)
         writer.writerow(['question'])
         for _ in tqdm(range(n), desc="Looping generate questions"):
-            q = generate_questions()
+            q = generate_questions(n_questions=100)
             writer.writerow([q])
 
 def find_answers(docs_dir: str='qa', input_file_name: str='questions.csv', output_file_name: str='qa.csv'):

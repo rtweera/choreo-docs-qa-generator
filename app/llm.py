@@ -43,7 +43,7 @@ def summarize_by_llm(
     except Exception as e:
         return f"Error summarising content: {str(e)}"
 
-def generate_questions(summary: str = load_summary(), examples: str = load_qa(n=100), prompt: PromptTemplate = question_prompt, llm = load_model()) -> str:
+def generate_questions(summary: str = load_summary(), examples: str = load_qa(n=100), prompt: PromptTemplate = question_prompt, llm = load_model(), n_questions=10) -> str:
     if not summary.strip():
         return "No summary presented"
     if not examples.strip():
@@ -52,7 +52,7 @@ def generate_questions(summary: str = load_summary(), examples: str = load_qa(n=
     chain = prompt | llm | StrOutputParser();
 
     try:
-        response_with_questions = chain.invoke({"context": summary, "examples": examples, "n": 10})
+        response_with_questions = chain.invoke({"context": summary, "examples": examples, "n": n_questions})
         return response_with_questions.strip() + '\n'
     except Exception as e:
         return f"Error getting response: {str(e)}"
