@@ -53,6 +53,6 @@ def generate_questions(summary: str = load_summary(), examples: str = load_qa(n=
 
     try:
         response_with_questions = chain.invoke({"context": summary, "examples": examples, "n": 10})
-        return response_with_questions.strip()
+        return response_with_questions.strip() + '\n'
     except Exception as e:
         return f"Error getting response: {str(e)}"
