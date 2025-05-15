@@ -4,8 +4,8 @@ from app import directory_sum, llm
 from config import config
 from app.logger import Logger
 
-health_logger = Logger(__name__, "main_runs.log")
-llm_logger = Logger(__name__, 'llm_runs.log')
+health_logger = Logger('health', "main_runs.log")
+llm_logger = Logger('llm', 'llm_runs.log')
 
 
 def full_flow():
