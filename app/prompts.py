@@ -19,10 +19,10 @@ Based on the following documentation about Choreo and the examples of existing q
 {examples}
 
 --- Task ---
-Now generate {n} new relevant questions (no answers needed):
-1.
-2.
-3.
+Now generate {n} new relevant questions (no answers needed). Do not provide any other texts. Only the questions, on question on each line:
+<question1>
+<question2>
+<question3>
 ...
 """
 )
