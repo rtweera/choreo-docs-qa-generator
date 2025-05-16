@@ -22,6 +22,7 @@ def main():
         "--concat", action="store_true", help="Run the final concatenation only"
     )
     parser.add_argument("--question", action="store_true", help="Run the question generation")
+    parser.add_argument("-n", "--num-questions", type=int, default=1, help="Number of questions to generate")
     parser.add_argument("--chat", action="store_true", help="Run the choreo chat")
     parser.add_argument("--all", action="store_true", help="Run the entire flow")
     parser.add_argument("--answer", action="store_true", help="Run the answer generation from questions")
@@ -33,8 +34,7 @@ def main():
         directory_sum.concat_summaries(config.DOCS_DIR)
     if args.question:
         health_logger.info('Question run: Question generation')
-        # llm_logger.info(llm.generate_questions())
-        qa_generator.run_generate_questions()
+        qa_generator.run_generate_questions(n=args.num_questions)        
     if args.answer:
         health_logger.info('Answer run: Answer generation')
         qa_generator.find_answers()
