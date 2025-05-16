@@ -7,7 +7,7 @@ from tqdm import tqdm
 def process(
     docs_dir: str = "qa",
     input_file_name: str = "all_qa.csv",
-    output_file_name: str = "final.jsonl",
+    output_file_name: str = "choreo_dataset.jsonl",
 ):
     """
     Processes a CSV file containing questions and answers, and converts it into a JSONL file
