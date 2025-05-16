@@ -18,14 +18,14 @@ def ask_question(question):
         "perspective": "dev"
     })
 
-    print("awaiting response")
+    # print("awaiting response")
     response = requests.request("POST", API_URL, headers=HEADERS, data=payload, stream=True)
 
     if response.status_code == 401:
         print(f"request failed\nResponse:{response.text}")
         return
 
-    print(f"response arrived:\n{response}")
+    # print(f"response arrived:\n{response}")
 
     full_answer = ""
     for line in response.iter_lines(decode_unicode=True):
