@@ -1,6 +1,230 @@
 question
-How can I configure a custom error page for my web application in Choreo?
-How can I view the audit logs for my organization in Choreo?
-How do I configure a liveness probe for my service component in Choreo?
-How can I integrate my existing CI/CD pipeline with Choreo to automatically deploy new container images?
-What are the steps to register a third-party service that requires OAuth 2.0 authentication in Choreo?
+How do I view build logs using the Choreo CLI?
+How do I deploy to the Development environment using the Choreo CLI?
+How do I verify the deployment using the Choreo CLI?
+How do I view runtime logs using the Choreo CLI?
+How do I deploy to the Production environment using the Choreo CLI?
+How do I manage authentication with Personal Access Tokens (PATs) in Choreo?
+What are personal access tokens?
+What are some sample use cases for personal access tokens?
+How do I set up personal access tokens in Choreo?
+How do I use a personal access token with the Choreo CLI?
+How do I manage and revoke tokens in Choreo?
+What are some best practices for token management in Choreo?
+What is the Choreo Marketplace?
+How does the Choreo Marketplace facilitate service reuse and sharing within an organization?
+How are services discoverable in the Choreo Marketplace?
+What information is revealed when exploring a service in the Choreo Marketplace?
+How are services automatically added to the Choreo Marketplace?
+How does the Choreo Marketplace display service versions?
+"How are service definitions, visibility, and descriptions updated in the Choreo Marketplace?"
+What is CI/CD and how does Choreo provide a CI/CD experience?
+"What is the ""build once, deploy many"" strategy and how is it used in Choreo?"
+How are build pipelines auto-generated in Choreo?
+Can builds be repeated from the same code version in Choreo?
+How can users manually trigger builds in Choreo?
+Can automatic builds be enabled on commit in Choreo?
+How can deployment be manual or automatic upon build completion in Choreo?
+What is the setup area used for in Choreo deployments?
+Are deployments immutable in Choreo?
+Can components be promoted across environments in Choreo?
+What are environment-independent and environment-specific configurations in Choreo?
+How can task executions be tracked and monitored in Choreo?
+What type of updates are performed for zero-downtime deployments in Choreo?
+What are health checks and how are they ensured before traffic is switched to a new build?
+What is a component in Choreo?
+How is a component linked to a Git repository?
+What does a component map to in Kubernetes?
+What are Connections in Choreo?
+How do Connections enable integration with other Choreo services or external resources?
+What is a Connection ID and what is its purpose?
+How are connection parameters mapped to environment variables?
+At what time does Choreo inject values into these variables?
+What are Project-level Connections?
+What are Component-level Connections?
+What are data planes in Choreo?
+What is the control plane in Choreo?
+What are the two types of data planes in Choreo?
+What are cloud data planes?
+What are private data planes?
+Where can private data planes be deployed?
+What are the infrastructure requirements for private data planes?
+How do private data planes communicate with the control plane?
+What is the observability architecture of private data planes?
+What are the different management models for private data planes?
+What are Deployment Tracks in Choreo?
+How do Deployment Tracks streamline software component deployments?
+What challenges do Deployment Tracks address?
+What is the relationship between Deployment Tracks and branches in a GitHub repository or a container registry?
+How is API versioning handled in Choreo?
+What is Semantic Versioning (SemVer) and how is it used in Choreo?
+What is an Endpoint in Choreo?
+How is an Endpoint exposed within a component?
+What is a service contract and what does it contain?
+How does Choreo enable API management per endpoint?
+What are Environments in Choreo?
+How are projects associated with environments?
+Can components be promoted across environments?
+What happens with environment-specific configuration values when components are promoted?
+What is an organization in Choreo?
+What are the membership rules in an organization in Choreo?
+How does Choreo manage user permissions?
+What is a project in Choreo?
+How are components deployed within a project in Choreo?
+How are Kubernetes namespaces used in Choreo?
+What resources are structured in a hierarchy in Choreo?
+"How are Data planes, Organizations, Environments, and Components related in Choreo?"
+How can new users create an organization in Choreo?
+What is the purpose of the Choreo demo organization?
+How can I join the demo organization in Choreo?
+What can I explore by joining the demo organization?
+Where can I find more details on architecture and source code of the Customer Reward Management System Sample?
+What is the Quick Deploy feature in Choreo?
+How can new users create an organization and a project to use Quick Deploy?
+How can I try out Quick Deploy in Choreo?
+How can I test a service after Quick Deploy?
+How can I access a web application after Quick Deploy?
+How can I execute manual/scheduled tasks after Quick Deploy?
+Where can I find the cron schedule for scheduled tasks after Quick Deploy?
+What kind of samples are provided by Choreo?
+What are the prerequisites for exploring the Choreo samples collection?
+How can I explore the Choreo samples collection?
+What filters can be used to explore samples?
+Can I quick deploy samples?
+Where can I access the source code of samples?
+How can I consume an API Key Secured Service in Choreo?
+What is the process for creating an API Key in the Choreo Developer Portal?
+What information do I need to provide when generating an API Key?
+Where do I use the generated API Key to authenticate API requests?
+How do I consume an OAuth2 Secured Service in Choreo?
+What are the steps to generate an access token via curl?
+What values do I need to copy from the Choreo Developer Portal to generate an access token via curl?
+What is the purpose of base64 encoding the consumer key and consumer secret?
+What is an alternative way to generate an access token for testing purposes?
+Where do I use the generated access token when invoking the API?
+How can I search for APIs in the Choreo Developer Portal?
+How are APIs categorized in the Choreo Developer Portal?
+How do visibility settings control access to APIs?
+What is an application in Choreo?
+How do I create an application in Choreo?
+What is OAuth 2.0 and how is it used for API access in Choreo?
+How do I generate environment-specific keys for an application?
+What advanced configurations are available when generating keys?
+What does subscribing to an API ensure?
+How can I generate an access token via cURL or the Developer Portal UI?
+How can API Keys be regenerated and what is the grace period?
+How can API Keys be deleted?
+What OAuth 2.0 grant types are supported in Choreo?
+What is the challenge with revoking JWT access tokens?
+What are the recommended practices for using JWT access tokens in Choreo?
+How can I share applications with organization members in the Choreo Developer Portal?
+What is Bring Your Own Image (BYOI) in Choreo?
+What component types support BYOI?
+What are the prerequisites for using BYOI?
+What authentication types are supported for container registries in Choreo?
+What information is required for public (anonymous) access authentication?
+What information is required for basic authentication?
+What is Docker config and how is it used for authentication?
+What is vendor-specific authentication and when is it used?
+What are the recommended authentication options for Azure Container Registry (ACR)?
+What are the recommended authentication options for Google Artifact Registry (GAR)?
+Why is ECR not recommended for basic authentication?
+What are the recommended authentication options for Docker Hub (Private)?
+What are the recommended authentication options for GitHub Container Registry (GHCR)?
+How do I register a container registry in Choreo?
+How do I create a component in Choreo using BYOI?
+How do I deploy the component in Choreo using BYOI?
+How do I update the image and set network visibility?
+How do I define endpoints for service components using BYOI?
+How do I integrate my CI pipelines to trigger deployments on Choreo using webhooks?
+How are services and integrations exposed in Choreo?
+What attributes are defined by endpoints?
+How can endpoints be configured in Choreo?
+What is the `component.yaml` file and how is it used to configure endpoints?
+What is the priority order for endpoint configurations?
+What are the benefits of exposing endpoints as managed APIs?
+How do I expose an endpoint as a managed API in Choreo?
+What is the default component URL structure?
+How do I change the default endpoint of a component?
+What are the restrictions on changing the default endpoint?
+How do I edit a UI-Defined Endpoint?
+What happens if I commit a `component.yaml` file after defining an endpoint in the UI?
+How do I connect my repository to Choreo for deploying a containerized application?
+How do I deploy a containerized component in Choreo?
+How do I run unit tests in the build pipeline for a containerized application?
+How do I provide application configurations for a containerized application?
+What are ConfigMaps and Secrets and how are they used in Choreo?
+How do I configure deployment settings such as scaling and resource limits?
+Can I configure health checks for a containerized application?
+"How do I build, deploy, and promote a containerized application?"
+How does Choreo perform security vulnerability scans during the build process?
+What are buildpacks and how are they used in Choreo?
+What buildpacks are supported by Choreo?
+How do I develop a component using buildpacks?
+How do I configure build-time environment variables when using buildpacks?
+How do I develop a Webhook in Choreo?
+What are the prerequisites for developing a Webhook?
+How do I create a Webhook component in Choreo?
+How do I connect Choreo to my GitHub account?
+How do I deploy a Webhook?
+How do I set the Webhook secret and email address?
+How do I connect the Webhook to the GitHub repository?
+How do I test a Webhook?
+How do I promote a Webhook to the Production environment?
+What is an External Consumer in Choreo?
+What are the prerequisites for developing an External Consumer?
+How do I create an External Consumer component?
+How do I manage authentication for an External Consumer?
+How do I connect an External Consumer to a service deployed in Choreo?
+What is the Choreo VS Code extension?
+What are the prerequisites for using the Choreo VS Code extension?
+How do I sign in to Choreo using the VS Code extension?
+How do I create a new component using the VS Code extension?
+What is the component details view and what actions can I perform there?
+What is the project context and how is it managed by the VS Code extension?
+What is the context.yaml file and where is it located?
+What does the Choreo extension scan the root of the opened Git repository for?
+What are the benefits of committing the context.yaml file to the Git repository?
+How can I regenerate the context.yaml file if it is not committed to the Git repository?
+How do I discover additional features provided by the Choreo extension?
+How do I troubleshoot issues with the Choreo extension?
+Where can I get help with the Choreo VS Code extension?
+How do I develop components with Git in Choreo?
+What Git providers are supported by Choreo?
+What are the key benefits of connecting a Git repository to Choreo?
+How do I connect a Git repository to Choreo?
+How do I authorize GitHub with Choreo?
+What permissions are granted when authorizing Choreo as a GitHub application?
+How do I add Git submodules to a project in Choreo?
+How do I automatically pull latest versions of Git submodules?
+What components support automatically pulling the latest versions of Git submodules?
+How do I ensure the changes are applied to the deployed environment?
+How do I authorize Bitbucket with Choreo?
+What permissions are granted when authorizing using a personal access token (PAT) from Bitbucket?
+How do I authorize self-managed GitLab with Choreo?
+What permissions are granted when authorizing using a personal access token (PAT) obtained from your GitLab self-managed server?
+What is Bring Your Own Image (BYOI) in Choreo?
+What are the prerequisites for using BYOI?
+What component types support BYOI?
+How do I register a container registry in Choreo?
+What authentication types are supported for container registries?
+What are the recommended authentication options for Azure Container Registry (ACR)?
+What are the recommended authentication options for Google Artifact Registry (GAR)?
+What are the recommended authentication options for Docker Hub (Private)?
+What are the recommended authentication options for GitHub Container Registry (GHCR)?
+How do I create a component in Choreo using BYOI?
+How do I deploy the component in Choreo?
+How do I expose service endpoints?
+How do I auto-deploy images in Choreo with an external CI/build pipeline?
+How do I configure my CI/build pipeline to trigger automatic deployments?
+How do I generate a token for my CI pipeline?
+How do I initiate an HTTP POST request to the Choreo webhook endpoint?
+What is the structure of a service endpoint in Choreo?
+What are the attributes of an endpoint in Choreo?
+What are the supported endpoint protocols in Choreo?
+What are the possible values for network visibility of an endpoint?
+What does the Context (HTTP and GraphQL only) field do?
+How do I configure endpoints?
+How does the method of defining endpoints depend on the buildpack?
+What happens if a `component.yaml` file is not present?
+How can UI-defined and auto-generated endpoints be overridden?

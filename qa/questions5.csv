@@ -1,0 +1,147 @@
+question
+How do I configure a custom error page for managed authentication?
+How can I access user claims information in a Choreo web application?
+What is the purpose of the session_hint parameter in the sign-out process?
+How can I test the custom domain configuration in Choreo?
+What are the entity types available for custom domain configuration?
+What happens if the custom domain verification fails?
+How long does it take for Developer Portal customizations to apply after adding a custom domain?
+What is the difference between a ConfigMap and a Secret in Choreo?
+How can I manage Ballerina configurables in Choreo?
+What are the required permissions for environment promotion approvals?
+How do I configure Asgardeo as an external IdP for my Developer Portal?
+How can I enable auto-approval for self-sign-up users?
+What are the different mapping levels in Choreo's access control?
+How can I override the organization-level egress policy at the project level?
+What is the purpose of burst control in API subscription plans?
+How do I preview changes to the Developer Portal theme?
+How do I reset the Developer Portal theme to the default settings?
+What happens when an invited user does not accept the organization invitation?
+What is the difference between a Role and a Group in Choreo?
+How do I configure health checks for my Choreo components?
+What is the purpose of a liveness probe?
+What is the purpose of a readiness probe?
+What are the different probe types available in Choreo?
+How do I observe real-time container logs in Choreo?
+How do I view container conditions and events in Choreo?
+What are the benefits of autoscaling component replicas?
+What is scale-to-zero and how does it work in Choreo?
+What are the limitations of scale-to-zero in Choreo?
+How do I troubleshoot issues with scale-to-zero?
+How do I create a configuration group in Choreo?
+How can I link a configuration group to a component?
+What is the difference between configurations and secrets in Choreo?
+How do I delete a configuration group in Choreo?
+How do I update an existing configuration or secret?
+How do I delete an existing configuration or secret?
+Can I create a custom continuous deployment pipeline in Choreo?
+How do I add a continuous deployment pipeline to a project?
+How do I change the default continuous deployment pipeline of a project?
+How do I delete an environment in Choreo?
+What are the different types of volume mounts available in Choreo?
+How do I create a persistent storage space for my container?
+How do I configure a VPN using Tailscale in Choreo?
+How do I handle node key expiry for the Tailscale proxy?
+What are the security best practices for using Tailscale in Choreo?
+How do I generate OAuth credentials for testing APIs?
+How do I obtain an access token for testing APIs?
+What is the difference between API-level and operation-level rate limiting?
+How do I consume an API secured with an API Key?
+How do I deploy a containerized application in Choreo?
+How do I connect my repository to Choreo for deploying containerized applications?
+How do I provide application configurations for containerized deployments?
+How do I configure deployment settings like scaling and resource limits?
+How does Choreo support deploying applications with buildpacks?
+How do I configure build-time environment variables for buildpacks?
+How do I develop a webhook in Choreo?
+How do I connect a webhook to a GitHub repository?
+How do I test a webhook in Choreo?
+What is an external consumer in Choreo?
+How do I manage authentication for an external consumer?
+How can I develop components using VS Code with the Choreo extension?
+What is the purpose of the .choreo/context.yaml file?
+How do I troubleshoot issues with the Choreo VS Code extension?
+What permissions are granted when authorizing GitHub with Choreo?
+How do I add Git submodules to a project in Choreo?
+How do I automatically pull the latest versions of Git submodules?
+What permissions are required for Bitbucket authorization with Choreo?
+What are the prerequisites for using Bring Your Own Image (BYOI) in Choreo?
+How do I register a container registry in Choreo for BYOI?
+What are the different authentication types supported for container registries?
+How do I create a component in Choreo using a container registry source?
+How do I update the image tag during deployment for BYOI?
+How do I expose service endpoints for BYOI components?
+How do I configure a CI/build pipeline to auto-deploy images to Choreo?
+What are the different network visibility options for endpoints in Choreo?
+How do I expose endpoints as managed APIs in Choreo?
+How do I change the default endpoint of a component?
+How do I edit a UI-defined endpoint in Choreo?
+How do I create a temporary storage space for my container?
+How do I create a persistent storage space for my container in Choreo?
+How can I deploy an image from a container registry?
+How can I define a command and arguments for the container?
+How can I create and manage a Choreo-Managed Cache instance?
+How do I connect to my Choreo-Managed Cache instance?
+What are the high availability and automatic backup features for Choreo-Managed Cache?
+"What are the limitations of Choreo-Managed Cache, such as connection limits and restricted commands?"
+How do I create a Choreo-managed MySQL database?
+How do I create a Choreo-managed PostgreSQL database?
+What are the high availability and automatic backup features for Choreo-managed MySQL databases?
+What are the high availability and automatic backup features for Choreo-managed PostgreSQL databases?
+What connection limits apply to Choreo-managed MySQL databases based on the service plan?
+What connection limits apply to Choreo-managed PostgreSQL databases based on the service plan?
+What are the prerequisites for creating a Choreo-managed database?
+How do I create a Kafka topic in Choreo?
+What are the advanced topic configurations available when creating a Kafka topic?
+How do I manage service users and access control lists for a Kafka service?
+How do I create a Choreo-managed Kafka service?
+How do I connect to my Choreo-managed Kafka service?
+How do I monitor the performance of a Kafka service?
+What metrics are available for monitoring a Kafka service?
+What are the different types of alerts that can be configured in Choreo?
+How do I configure a latency alert?
+How do I configure a traffic alert?
+How do I view alert history in Choreo?
+How do I generate a custom report in Choreo Insights?
+What metrics are available for generating custom reports?
+What group-by fields are available for generating custom reports?
+How do I download a report in Choreo Insights?
+How do I integrate Choreo with Moesif for API analytics?
+What is the purpose of the diagnostics view in the Choreo observability dashboard?
+How can I view runtime logs in Choreo?
+How can I view audit logs in Choreo?
+How do I manage access to audit logs?
+How long are audit logs retained in Choreo?
+How do I configure the CIO dashboard to include all DORA metrics?
+What is the purpose of the filter label in the CIO dashboard configuration?
+How do I enrich incident tickets with deployment information for DORA metrics?
+How do I view DORA metrics in Choreo?
+What does the snapshot view of DORA metrics represent?
+What does the time series view of DORA metrics represent?
+What does deployment frequency metric represent in Choreo?
+What does lead time for change metric represent in Choreo?
+How can I view PDP logs if viewing it is not supported by Choreo yet?
+How do I connect to Azure Log Analytics to view PDP logs?
+How do I connect to Amazon CloudWatch to view PDP logs?
+How do I find the release ID and the namespace for the component?
+What are the steps to deploy a web application that consumes a backend service?
+How do I test a service using the OpenAPI Console?
+How do I create a connection between a web application and a deployed service?
+How do I enable managed authentication for a web application?
+How do I test the front-end application after deploying it?
+How do I quick deploy a sample?
+How do I join the demo organization?
+How do I use the CLI to create a new project?
+How do I use the CLI to create a new component?
+How do I create and use personal access tokens?
+What are the best practices for personal access token management?
+How do I revoke personal access tokens?
+How do I change API visibility?
+How do I add documents to an API?
+What are the API lifecycle states?
+How do I rename the API display name?
+How do API policies work?
+How do I apply advanced settings on mediation policies?
+How do I attach and manage policies?
+How do I assign subscription plans to APIs?
+How do I subscribe to an API with a subscription plan?

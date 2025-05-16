@@ -1,0 +1,173 @@
+question
+What is the purpose of configuring a custom domain for an organization in Choreo?
+How does Choreo's custom domain configuration model work?
+Who can add custom domains in Choreo?
+Who can request to use a custom domain in Choreo?
+Is administrator approval required for custom domain requests in Choreo?
+What are the prerequisites for configuring a custom domain in Choreo?
+How do I sign in to the Choreo Console?
+How do I create an organization in Choreo?
+Where do I navigate to add a custom domain in the Choreo Console?
+What information do I need to enter when adding a custom domain in Choreo?
+What is a CNAME record and why is it needed when configuring a custom domain?
+How do I create a DNS record with my DNS provider for a custom domain in Choreo?
+What happens after I create the CNAME record for my custom domain?
+What happens if the CNAME record verification fails?
+What TLS certificate providers are available when configuring a custom domain in Choreo?
+Can I import my own TLS certificate for a custom domain in Choreo?
+What is Let's Encrypt and how can I use it for TLS certificates in Choreo?
+Where will the added domain be listed in the Choreo Console?
+What happens to the Developer Portal customizations when I add a custom domain?
+How can developers request to use available custom domains in Choreo?
+What are the steps to request a custom URL for a component in Choreo?
+Where do I select the component from in the Choreo Console to request a custom URL?
+Where do I find the URL Settings for a component in the Choreo Console?
+"What is the ""Edit URL Mapping"" icon and where do I find it?"
+"What options are available in the ""URL Settings"" dialog when requesting a custom URL?"
+What is a context path and why is it needed for APIs when configuring a custom URL?
+"What happens after I click ""Configure"" when requesting a custom URL?"
+"What does ""Pending"" status mean for a custom URL request?"
+How do I approve a custom URL mapping in Choreo?
+Where do I navigate to approve pending URL requests in the Choreo Console?
+"What is the ""Approve URL Mapping"" icon and where do I find it?"
+What details should I review before approving a custom URL request?
+"What happens after I click ""Approve"" when approving a custom URL request?"
+What happens to the component's invoke URL upon approval of a custom URL request?
+What is Choreo's built-in identity provider (IdP) and what is it used for?
+Is the Choreo built-in IdP recommended for production use?
+What are the prerequisites for configuring a Choreo built-in IdP user store?
+What level of access is required to configure a Choreo built-in IdP user store?
+Where do I navigate to configure the Choreo built-in IdP user store in the Choreo Console?
+"What is the ""Choreo Built-in Identity Provider"" pane and where do I find it?"
+What is the purpose of the sample User store template file (.csv)?
+Where can I download the sample User store template file (.csv)?
+What information should I specify in the User store template file (.csv)?
+How do I upload the User store template file (.csv) in the Choreo Console?
+What is the purpose of configuring approvals for Choreo workflows?
+What types of workflows can have approval processes configured in Choreo?
+What permissions are required to review and respond to environment promotion approval requests?
+What permissions are required to review and respond to API subscription approval requests?
+Where do I navigate to set up an approval process for a workflow in the Choreo Console?
+What is the edit icon for a workflow and where do I find it?
+What information do I need to select when setting up an approval process for a workflow?
+"What happens after I click ""Save"" when setting up an approval process for a workflow?"
+What is enterprise login and how does it benefit users in Choreo?
+What are the prerequisites for configuring enterprise login in Choreo?
+What information do I need to provide to Choreo support to configure enterprise login?
+What is a DNS record verification code and how is it used for enterprise login?
+What is Asgardeo and how does it relate to enterprise login in Choreo?
+What is a federated enterprise IdP and how do I configure it in Asgardeo for Choreo?
+What is role-based access control and how does it work with enterprise login in Choreo?
+What are the steps to configure role-based access control for enterprise login in Choreo?
+Where do I configure the external IdP in Asgardeo for enterprise login?
+"What is the ""WSO2\_LOGIN\_FOR\_CHOREO\_CONSOLE"" application in Asgardeo and how is it used?"
+How do I map Choreo groups to enterprise IdP groups?
+Where do I navigate to manage IdP group mapping in the Choreo Console?
+What is self-sign-up and how does it benefit users in the Developer Portal?
+What are the prerequisites for configuring Developer Portal self-sign-up in Choreo?
+What information do I need to provide to Choreo support to configure enterprise IdP for the Developer Portal?
+Where do I sign in to Asgardeo to configure Developer Portal self-sign-up?
+"What is the ""WSO2\_LOGIN\_FOR\_CHOREO\_DEV\_PORTAL"" application in Asgardeo and how is it used?"
+What is the Access URL and why is it important to set it correctly for the Developer Portal?
+"What user attributes should I add to the ""WSO2\_LOGIN\_FOR\_CHOREO\_DEV\_PORTAL"" application in Asgardeo?"
+What is basic authentication and how do I configure it in Asgardeo?
+How do I configure self-registration in Asgardeo?
+How do I manage new users who sign up through the Developer Portal self-sign-up page?
+Where do I find the settings to enable auto-approval or manually approve/reject user accounts in the Choreo Console?
+What is access control and how does it work in the Choreo Console?
+"What are Roles, Groups, and Mapping levels and how are they used to control access in Choreo?"
+What is the difference between Organization and Project mapping levels in Choreo?
+What is the purpose of the sample scenario provided for granting development access?
+How do I create a project in Choreo?
+How do I create a new group in Choreo?
+How do I assign roles to a group in Choreo?
+How do I add users to a group in Choreo?
+What is egress traffic and why is it important to control it in Choreo?
+What are allow lists and deny lists and how are they used to control egress traffic in Choreo?
+How do I configure an egress policy at the organization level in Choreo?
+Where do I navigate to configure egress control in the Choreo Console?
+"What is the difference between ""Allow All"" and ""Deny All"" egress policies?"
+How do I add rules for IP ranges or domains in an egress policy?
+How do I override the organization-level egress policy at the project level in Choreo?
+"What happens if I add project-level rules to an organization-level ""Allow All"" egress policy?"
+"What happens if I add project-level rules to an organization-level ""Deny All"" egress policy?"
+What are API subscription plans and how are they used to control access to APIs in Choreo?
+How do I create an organization-level subscription plan in Choreo?
+Where do I navigate to manage subscription plans in the Choreo Console?
+What information do I need to enter when creating a subscription plan in Choreo?
+What are rate limits and burst control and how are they configured in a subscription plan?
+What is the Developer Portal and how can I customize it in Choreo?
+How do I customize the Developer Portal theme in Choreo?
+Where do I navigate to manage the Devportal Theme in the Choreo Console?
+What elements of the Developer Portal can I customize?
+How do I preview changes to the Developer Portal theme before applying them?
+How do I save changes to the Developer Portal theme as a draft?
+How do I apply the changes to the Developer Portal theme and make them live?
+How do I reset the Developer Portal theme to the default theme?
+Who can invite users to an organization in Choreo?
+What happens when a user is invited to an organization in Choreo?
+How does an invited user join an organization in Choreo?
+What is a workflow approval request and how are authorized reviewers notified?
+Where do I navigate to view workflow approval requests in the Choreo Console?
+What information is displayed when reviewing a workflow approval request?
+How do I approve or reject a workflow approval request?
+What happens after I approve or reject a workflow approval request?
+What is Asgardeo and how can it be configured as an external Identity Provider (IdP) in Choreo?
+How do I add Asgardeo as an external IdP in Choreo?
+Where do I navigate to manage Identity Providers in the Choreo Console?
+What information do I need to specify when adding Asgardeo as an IdP?
+What is the well-known URL and where do I find it in my Asgardeo instance?
+What is Azure Active Directory (Azure AD) and how can it be configured as an external Identity Provider (IdP) in Choreo?
+How do I add Azure AD as an IdP in Choreo?
+What information do I need to provide when adding Azure AD as an IdP?
+What is the Well-Known URL and where do I find it in my Azure AD instance?
+What is API rate limiting and why is it important?
+What is API-level rate limiting?
+What is operation-level rate limiting?
+How do I enable rate limiting for an API in Choreo?
+What are the rate-limiting response headers and what information do they provide?
+What is API visibility and what are the different visibility levels in Choreo?
+How do I change the visibility of an API in Choreo?
+What are the steps to add documents to an API in Choreo?
+What is API lifecycle management and what are the different API lifecycle states in Choreo?
+How do I manage the lifecycle of an API in Choreo?
+How do I rename the API display name in Choreo?
+What are the OWASP Top 10 and how are they enforced in Choreo?
+What are the WSO2 API Design Guidelines?
+What are the WSO2 Style Guidelines?
+What are API policies and how are they used in Choreo?
+What are the inbuilt mediation policies supported in Choreo?
+What are the advanced settings available for mediation policies?
+"How do I attach, rearrange, or swap policies in Choreo?"
+How do I assign subscription plans to APIs?
+How can API consumers subscribe to an API with a subscription plan?
+What is mutual TLS and how does it secure communication between components in Choreo?
+"How do I generate root, client, and server certificates for mutual TLS in Choreo?"
+How do I pass end-user attributes to upstream services in Choreo?
+What is a JWT and how is it used to pass end-user attributes in Choreo?
+What claims are included in the JWT used in Choreo?
+What is JWKS and how is it used to validate the JWT in Choreo?
+How do I secure API access with Asgardeo in Choreo?
+How do I assign scopes to APIs in Choreo?
+How do I create APIs and applications in Asgardeo?
+How do I enable external IdP authentication in Choreo?
+How do I secure communication between the Choreo Gateway and my backend with mutual TLS?
+How do I configure the backend certificate in Choreo?
+How can I secure web applications with managed authentication in Choreo?
+How do I implement sign-in and sign-out functionality in a web application using Choreo's managed authentication?
+How do I obtain user information claims in a web application using Choreo's managed authentication?
+How do I invoke APIs from a web application using Choreo's managed authentication?
+How do I handle session expiry in a web application using Choreo's managed authentication?
+How do I set up a custom error page in a web application using Choreo's managed authentication?
+How do I test secure API access with Choreo's built-in security token service?
+"How do I assign scopes, create roles, and assign permissions using Choreo's built-in authorization?"
+How do I generate OAuth credentials and retrieve access tokens for testing API invocation?
+What is the Choreo Command-Line Interface (CLI)?
+What are the key features of the Choreo CLI?
+How do I install the Choreo CLI?
+How do I log in to Choreo using the CLI?
+How do I create a project using the Choreo CLI?
+How do I create a component using the Choreo CLI?
+How do I view component details using the Choreo CLI?
+How do I build a component using the Choreo CLI?
+How do I view build status using the Choreo CLI?
