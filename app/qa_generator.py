@@ -13,19 +13,21 @@ def run_generate_questions(n: int=1, docs_dir: str='qa', file_name: str='questio
     with open(file_path, 'w', encoding='utf-8', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['question'])
-        for _ in tqdm(range(n), desc="Looping generate questions"):
-            q = generate_questions(n_questions=100)
-            writer.writerow([q])
+        print("Generating questions...")
+        q_block:str = generate_questions(n_questions=n)
+        questions = [q.strip() for q in q_block.split('\n') if q.strip()]
+        for question in tqdm(questions, desc="Writing questions"):
+            writer.writerow([question])
 
 def find_answers(docs_dir: str='qa', input_file_name: str='questions.csv', output_file_name: str='qa.csv'):
     input_path = os.path.join(docs_dir, input_file_name)
     output_path = os.path.join(docs_dir, output_file_name)
     with open(input_path, 'r', encoding='utf-8', newline='') as f_in, \
          open(output_path, 'w', encoding='utf-8', newline='') as f_out:
-        reader = csv.DictReader(f_in)
+        reader = list(csv.DictReader(f_in)) # making a list so tqdm can get the length 
         writer = csv.DictWriter(f_out, fieldnames=['question', 'answer'])
         writer.writeheader()
-        for row in reader:
+        for row in tqdm(reader, desc='Generating answers'):
             question = row['question']
-            answer = ask_question(question)
+            answer = ask_question(question).replace('\n', '\\n')
             writer.writerow({'question': question, 'answer': answer})
