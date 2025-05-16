@@ -1,18 +1,23 @@
 import pandas as pd
 import json
 import os
-from tqdm import tqdm 
+from tqdm import tqdm
 
-def process(docs_dir:str='qa', input_file_name:str='qa.csv', output_file_name:str='final.jsonl'):
+
+def process(
+    docs_dir: str = "qa",
+    input_file_name: str = "qa.csv",
+    output_file_name: str = "final.jsonl",
+):
     """
-    Processes a CSV file containing questions and answers, and converts it into a JSONL file 
+    Processes a CSV file containing questions and answers, and converts it into a JSONL file
     with a specific format for each entry.
     Args:
-        docs_dir (str): The directory where the input and output files are located. 
+        docs_dir (str): The directory where the input and output files are located.
                         Defaults to 'qa'.
-        input_file_name (str): The name of the input CSV file containing the data. 
+        input_file_name (str): The name of the input CSV file containing the data.
                                 Defaults to 'qa.csv'.
-        output_file_name (str): The name of the output JSONL file to be generated. 
+        output_file_name (str): The name of the output JSONL file to be generated.
                                 Defaults to 'final.jsonl'.
     The input CSV file is expected to have the following columns:
         - 'question': The question text.
@@ -37,6 +42,6 @@ def process(docs_dir:str='qa', input_file_name:str='qa.csv', output_file_name:st
             entry = {
                 "instruction": "Answer the following question about choreo",
                 "input": row["question"],
-                "output": row["answer"]
+                "output": row["answer"],
             }
             f.write(json.dumps(entry) + "\n")

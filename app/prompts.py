@@ -9,7 +9,7 @@ reduce_prompt = PromptTemplate.from_template(
 )
 
 question_prompt = PromptTemplate.from_template(
-"""
+    """
 Based on the following documentation about Choreo and the examples of existing questions and answers, generate {n} new questions that are relevant, informative, and follow the same style.
 
 --- Context ---
