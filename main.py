@@ -1,6 +1,6 @@
 import argparse
 
-from app import directory_sum, llm, qa_generator
+from app import directory_sum, llm, qa_generator, final_processor
 from app.choreo import choreo_chat
 from config import config
 from app.logger import Logger
@@ -21,11 +21,12 @@ def main():
     parser.add_argument(
         "--concat", action="store_true", help="Run the final concatenation only"
     )
+    parser.add_argument("--chat", action="store_true", help="Run the choreo chat")
     parser.add_argument("--question", action="store_true", help="Run the question generation")
     parser.add_argument("-n", "--num-questions", type=int, default=1, help="Number of questions to generate")
-    parser.add_argument("--chat", action="store_true", help="Run the choreo chat")
-    parser.add_argument("--all", action="store_true", help="Run the entire flow")
     parser.add_argument("--answer", action="store_true", help="Run the answer generation from questions")
+    parser.add_argument("--process", action='store_true', help="Run the final processing flow to align with model template")
+    parser.add_argument("--all", action="store_true", help="Run the entire flow")
     args = parser.parse_args()
 
     if args.health:
@@ -40,6 +41,8 @@ def main():
         qa_generator.find_answers()
     if args.chat:
         choreo_logger.info(choreo_chat.ask_question('what is choreo?'))
+    if args.process:
+        final_processor.process()
     if args.all:
         full_flow()
 

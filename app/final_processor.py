@@ -6,7 +6,7 @@ from tqdm import tqdm
 
 def process(
     docs_dir: str = "qa",
-    input_file_name: str = "qa.csv",
+    input_file_name: str = "all_qa.csv",
     output_file_name: str = "final.jsonl",
 ):
     """
@@ -37,8 +37,8 @@ def process(
     input_file_path = os.path.join(docs_dir, input_file_name)
     output_file_path = os.path.join(docs_dir, output_file_name)
     df = pd.read_csv(input_file_path)
-    with open(output_file_path) as f:
-        for row_index, row in tqdm(df.iterrows(), desc="Processing data"):
+    with open(output_file_path, 'w', encoding='utf-8') as f:
+        for row_index, row in tqdm(df.iterrows(), desc="Writing data"):
             entry = {
                 "instruction": "Answer the following question about choreo",
                 "input": row["question"],
